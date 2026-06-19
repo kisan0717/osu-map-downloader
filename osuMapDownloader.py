@@ -1,5 +1,3 @@
-#!/home/saurabh26/.local/bin/.venv/bin/python
-
 import sys
 import subprocess
 from urllib.parse import urlparse

@@ -345,7 +345,7 @@ def beatconnectProcess(downloadURL: str):
 def directDownloadProcess(downloadURL: str):
 	from pathlib import Path
 	import requests
-	import zipfile
+	# import zipfile
 
 	downloads = Path.home() / "Downloads"
 
@@ -399,22 +399,24 @@ def directDownloadProcess(downloadURL: str):
 			if chunk:
 				f.write(chunk)
 
-	try:
-		with zipfile.ZipFile(filePath) as z:
-			hasOSU = any(
-				name.endswith(".osu")
-				for name in z.namelist()
-			)
+	# commented for speed reasons
 
-		if not hasOSU:
-			print("Downloaded archive contains no .osu files")
-			filePath.unlink(missing_ok=True)
-			return False
+	# try:
+	# 	with zipfile.ZipFile(filePath) as z:
+	# 		hasOSU = any(
+	# 			name.endswith(".osu")
+	# 			for name in z.namelist()
+	# 		)
 
-	except zipfile.BadZipFile:
-		print("Downloaded file is not a valid zip")
-		filePath.unlink(missing_ok=True)
-		return False
+	# 	if not hasOSU:
+	# 		print("Downloaded archive contains no .osu files")
+	# 		filePath.unlink(missing_ok=True)
+	# 		return False
+
+	# except zipfile.BadZipFile:
+	# 	print("Downloaded file is not a valid zip")
+	# 	filePath.unlink(missing_ok=True)
+	# 	return False
 
 	openFile(str(filePath))
 

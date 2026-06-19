@@ -340,10 +340,7 @@ def beatconnectProcess(downloadURL: str):
 		return False
 
 	# open the downloaded .osz file
-	subprocess.Popen([
-		"xdg-open",
-		downloaded
-	])
+	openFile(downloaded)
 
 	return True
 
@@ -421,12 +418,24 @@ def directDownloadProcess(downloadURL: str):
 		filePath.unlink(missing_ok=True)
 		return False
 
-	subprocess.Popen([
-		"xdg-open",
-		str(filePath)
-	])
+	openFile(str(filePath))
 
 	return True
+
+def openFile(path: str):
+	import os
+	import platform
+
+	system = platform.system()
+
+	if system == "Windows":
+		os.startfile(path)
+
+	elif system == "Darwin":
+		subprocess.run(["open", path])
+
+	else:
+		subprocess.run(["xdg-open", path])
 
 def startProcess(beatmapsetID: int):
 	services = [

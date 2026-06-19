@@ -1,2 +1,2 @@
 # osu-map-downloader
-automatically download osu beatmaps and open them in game
+Automatically download osu beatmaps and open them in game

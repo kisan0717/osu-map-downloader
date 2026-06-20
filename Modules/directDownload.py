@@ -1,7 +1,7 @@
 from pathlib import Path
 import requests
 import zipfile
-from modules.helpers import openFile
+from Modules.Helpers import openFile
 
 def directDownloadProcess(downloadURL: str):
 	downloads = Path.home() / "Downloads"
@@ -73,7 +73,6 @@ def directDownloadProcess(downloadURL: str):
 		filePath.unlink(missing_ok=True)
 		return False
 
-	# disable openign the file for debugging
-	# openFile(str(filePath))
+	openFile(str(filePath))
 
 	return True

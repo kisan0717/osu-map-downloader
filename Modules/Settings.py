@@ -1,5 +1,5 @@
 import keyring
-from modules.constants import SERVICE
+from Modules.Constants import SERVICE
 
 def disableAutoDownload():
 	keyring.set_password(

@@ -1,7 +1,7 @@
 import tkinter as tk
 import keyring
-from modules.constants import SERVICE
-from modules.settings import getAutoDownload, toggleAutoDownload
+from Modules.Constants import SERVICE
+from Modules.Settings import getAutoDownload, toggleAutoDownload
 
 # tk gui for asking 1. download beatmap, 2. open url in browser, 3, edit credentials
 def askBeatmapAction() -> bool | None:

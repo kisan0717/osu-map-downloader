@@ -1,5 +1,5 @@
-from modules.constants import DOWNLOAD_FILE_EXTENSION, BROWSER
-from modules.helpers import openFile, openInBrowser
+from Modules.Constants import DOWNLOAD_FILE_EXTENSION, BROWSER
+from Modules.Helpers import openFile, openInBrowser
 
 def getDownloadFilePath(path, downloads, preDownloadFiles):
 	downloaded = ''

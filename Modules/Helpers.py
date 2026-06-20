@@ -1,8 +1,8 @@
 import subprocess
 import os
 import platform
-from modules.credentials import getClient
-from modules.constants import BROWSER
+from Modules.Credentials import getClient
+from Modules.Constants import BROWSER
 
 def openInBrowser(url: str):
 	subprocess.Popen([

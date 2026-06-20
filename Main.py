@@ -1,11 +1,11 @@
 import sys
 from traceback import print_exc
 from urllib.parse import urlparse
-from modules.helpers import openInBrowser, resolveBeatmapsetID, getDownloadURL
-from modules.gui import askBeatmapAction, createIdleWindow
-from modules.beatconnect import beatconnectProcess
-from modules.directDownload import directDownloadProcess
-from modules.settings import getAutoDownload
+from Modules.Helpers import openInBrowser, resolveBeatmapsetID, getDownloadURL
+from Modules.GUI import askBeatmapAction, createIdleWindow
+from Modules.Beatconnect import beatconnectProcess
+from Modules.DirectDownload import directDownloadProcess
+from Modules.Settings import getAutoDownload
 
 def downloadBeatmapset(url: str, service: str):
 	if service == 'beatconnect':

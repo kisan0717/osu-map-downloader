@@ -1,7 +1,7 @@
 import keyring
 import osu
-from modules.constants import SERVICE
-from modules.gui import editCredentials
+from Modules.Constants import SERVICE
+from Modules.GUI import editCredentials
 
 def getCredentials():
 	clientID = keyring.get_password(

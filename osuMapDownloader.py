@@ -468,18 +468,20 @@ def startProcess(beatmapsetID: int):
 	return False
 
 def main(url):
-	path = urlparse(url).path
+	parsed = urlparse(url if '://' in url else f'https://{url}')
+	path = parsed.path
 	parts = path.strip('/').split('/')
 
 	# check if it's a beatmap / beatmapset url
-	is_beatmapset = (
-		len(parts) >= 2
-		and (parts[0] == 'beatmapsets' or parts[0] == 'beatmaps')
+	is_beatmap_or_set = (
+		parsed.netloc == 'osu.ppy.sh'
+		and len(parts) >= 2
+		and parts[0] in ('beatmaps', 'beatmapsets', 'b')
 		and parts[1].isdigit()
 	)
 
 	# if not, open it in the browser and return
-	if not is_beatmapset:
+	if not is_beatmap_or_set:
 		print("not beatmapset url")
 		openInBrowser(url)
 		return None
@@ -499,7 +501,7 @@ def main(url):
 	beatmapsetID = int(parts[1])
 
 	# it it's a beatmap url, get the beatmapset id via osu api v2
-	if URLType == 'beatmaps':
+	if URLType == 'beatmaps' or URLType == 'b':
 		print('resolving beatmapset id')
 		beatmapsetID = resolveBeatmapsetID(beatmapsetID)
 		print('done.')

@@ -438,6 +438,8 @@ def openFile(path: str):
 		subprocess.run(["xdg-open", path])
 
 def startProcess(beatmapsetID: int):
+	from traceback import print_exc
+
 	services = [
 		'nerinyan',
 		'catboy',
@@ -464,6 +466,7 @@ def startProcess(beatmapsetID: int):
 		except Exception as e:
 			print(f'{service} failed:')
 			print(e)
+			print_exc()
 
 	return False
 
@@ -505,6 +508,8 @@ def main(url):
 		print('resolving beatmapset id')
 		beatmapsetID = resolveBeatmapsetID(beatmapsetID)
 		print('done.')
+
+	print(f'Beatmapset ID: {beatmapsetID}')
 
 	# if the beatmapset id cannon be resolved, open the url in browser and return
 	if beatmapsetID is None:

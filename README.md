@@ -10,6 +10,21 @@ When an osu! beatmap URL is opened, the downloader can:
 
 ---
 
+> [!IMPORTANT]
+> This application is built for players with slow internet and/or low-end hardware who can't really support osu! project to use osu!direct.
+> 
+> If you can please consider supporting the osu! project:  
+> https://osu.ppy.sh/home/support
+
+> [!WARNING]
+> This application only fully supports Linux at present.
+
+## Supported URL Types
+- `https://osu.ppy.sh/beatmaps/<id>`
+- `https://osu.ppy.sh/b/<id>`
+- `https://osu.ppy.sh/beatmapsets/<id>`
+- `https://osu.ppy.sh/s/<id>`
+
 ## Configuration
 
 Before building, you might want to edit the constants in:
@@ -154,7 +169,7 @@ This application requires an osu! API v2 Client ID and Client Secret.
 8. Open osuMapDownloader and select **Edit Credentials**.
 9. Enter your Client ID and Client Secret.
 
-The osu! API v2 credentials are used to get beatmapset ID if only a beatmap ID is available.
+The osu! API v2 credentials are used to get beatmapset ID from a beatmap ID when needed.
 Your credentials will be stored securely using your system's keyring service.
 
 ## Usage

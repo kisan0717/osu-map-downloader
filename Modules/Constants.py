@@ -1,5 +1,5 @@
 SERVICE = 'osuMapDownloader'
 
-BROWSER = 'firefox' # 'google-chrome-stable'
+BROWSER = 'firefox'
 
-DOWNLOAD_FILE_EXTENSION = '.osz.part' # '.crdownload'
+DOWNLOAD_FILE_EXTENSION = '.osz.part'

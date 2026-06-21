@@ -73,7 +73,6 @@ def directDownloadProcess(downloadURL: str):
 		filePath.unlink(missing_ok=True)
 		return False
 
-	# disable openign the file for debugging
-	# openFile(str(filePath))
+	openFile(str(filePath))
 
 	return True

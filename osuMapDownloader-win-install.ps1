@@ -1,4 +1,4 @@
-# osuMapDownloader-install.ps1
+# osuMapDownloader-win-install.ps1
 # Installs osuMapDownloader.exe into a per-user location and registers it
 # as a candidate HTTP/HTTPS handler in Windows.
 #
@@ -7,7 +7,7 @@
 # back to a copy sitting next to the script itself).
 #
 # Run with:
-#   powershell -ExecutionPolicy Bypass -File .\osuMapDownloader-install.ps1
+#   powershell -ExecutionPolicy Bypass -File .\osuMapDownloader-win-install.ps1
 
 $ErrorActionPreference = "Stop"
 

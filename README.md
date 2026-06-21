@@ -13,7 +13,7 @@ When an osu! beatmap URL is opened, the downloader can:
 > [!IMPORTANT]
 > This application is built for players with slow internet and/or low-end hardware who can't really support osu! project to use osu!direct.
 > 
-> If you can please consider supporting the osu! project:  
+> If you can, please consider supporting the osu! project:  
 > https://osu.ppy.sh/home/support
 
 ## Supported URL Types
@@ -22,15 +22,34 @@ When an osu! beatmap URL is opened, the downloader can:
 - `https://osu.ppy.sh/beatmapsets/<id>`
 - `https://osu.ppy.sh/s/<id>`
 
-## Configuration
+## Installation
 
-Before building, you might want to change the default browser in `Modules/Constants.py`
+### Linux
 
-```python
-BROWSER = 'firefox'
-```
+- From Release: (unavailable right now)
+  - Download the Linux zip file from the latest release.
+  - Extract the contents into a directory.
+  - Make the `Install.sh` executable as a program.
+  - Run `Install.sh` with terminal.
 
-Available browsers are also listed in the same file.
+- From Repo:
+  - [Build](#Building) the executable.
+  - Make the installation script executable as a program: `chmod +x osuMapDownloader-linux-install.sh`
+  - Run the installation script: `./osuMapDownloader-linux-install.sh`
+
+### Windows
+
+- From Release: (unavailable right now)
+  - Download the Windows zip file from the latest release.
+  - Extract the contents into a directory.
+  - Navigate to the directory in command prompt.
+  - Run the `powershell -ExecutionPolicy Bypass -File .\Install.ps1`
+  - Set osu! Map Downloader as your default browser.
+
+- From Repo:
+  - [Build](#Building) the executable.
+  - Run `powershell -ExecutionPolicy Bypass -File .\osuMapDownloader-win-install.ps1`
+  - Set osu! Map Downloader as your default browser.
 
 ## Building
 
@@ -67,7 +86,7 @@ dist/osuMapDownloader
 
 ---
 
-## Installation (Linux)
+## Manual Installation (Linux)
 
 Install the executable:
 
@@ -97,9 +116,9 @@ xdg-settings set default-url-scheme-handler https osuMapDownloader
 
 ---
 
-## First Run
+## Configuration
 
-Run the application:
+Run the application without any arguments:
 
 ```bash
 osuMapDownloader
@@ -109,6 +128,7 @@ This opens the settings window where you can:
 
 * Enter osu! APIv2 credentials.
 * Enable or disable automatic beatmap downloading.
+* Set your default browser.
 
 ---
 
@@ -149,8 +169,8 @@ Depending on your settings, the application will either:
 
 ---
 
-## Notes
-
-This application registers itself as the default handler for HTTP and HTTPS URLs.
-
-Non-osu! URLs are automatically forwarded to your web browser.
+> [!NOTE]
+>
+> This application registers itself as the default handler for HTTP and HTTPS URLs.
+>
+> Every URL other than an osu beatmap / beatmapset URL is instantly forwarded to your configured web browser.

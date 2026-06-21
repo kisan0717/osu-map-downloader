@@ -1,5 +1,4 @@
 import subprocess
-import os
 import platform
 from Modules.Constants import BROWSER, BROWSER_URL_FLAG
 from Modules.Credentials import getClient

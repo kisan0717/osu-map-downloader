@@ -1,4 +1,4 @@
-from Modules.Constants import DOWNLOAD_FILE_EXTENSION, BROWSER
+from Modules.Constants import DOWNLOAD_FILE_EXTENSIONS, BROWSER
 from Modules.Helpers import openFile, openInBrowser
 
 def getDownloadFilePath(path, downloads, preDownloadFiles):
@@ -53,7 +53,7 @@ def beatconnectProcess(downloadURL: str):
 
 	# wait a certain ammount of time for the download to start
 	for _ in range(waitDownloadStart):
-		files = list(downloads.glob(f'*{DOWNLOAD_FILE_EXTENSION}'))
+		files = list(downloads.glob(f'*{DOWNLOAD_FILE_EXTENSIONS[BROWSER]}'))
 
 		# if new .osz download files are found, list the first one and exit loop
 		if files:

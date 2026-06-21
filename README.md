@@ -16,9 +16,6 @@ When an osu! beatmap URL is opened, the downloader can:
 > If you can please consider supporting the osu! project:  
 > https://osu.ppy.sh/home/support
 
-> [!WARNING]
-> This application only fully supports Linux at present.
-
 ## Supported URL Types
 - `https://osu.ppy.sh/beatmaps/<id>`
 - `https://osu.ppy.sh/b/<id>`
@@ -27,53 +24,13 @@ When an osu! beatmap URL is opened, the downloader can:
 
 ## Configuration
 
-Before building, you might want to edit the constants in:
-
-```text
-Modules/Constants.py
-```
-
-```python
-SERVICE = 'osuMapDownloader'
-BROWSER = 'firefox'
-DOWNLOAD_FILE_EXTENSION = '.osz.part'
-```
-
-### SERVICE
-
-The keyring service name used to store your osu! API credentials and settings.
-
-You normally don't need to change this.
-
-### BROWSER
-
-The browser executable used when opening URLs.
-
-Examples:
+Before building, you might want to change the default browser in `Modules/Constants.py`
 
 ```python
 BROWSER = 'firefox'
 ```
 
-```python
-BROWSER = 'google-chrome-stable'
-```
-
-### DOWNLOAD_FILE_EXTENSION
-
-Temporary file extension used by your browser while downloads are in progress.
-
-For Firefox:
-```python
-DOWNLOAD_FILE_EXTENSION = '.osz.part'
-```
-
-For Chromium-based browsers such as Google Chrome and Chromium:
-```python
-DOWNLOAD_FILE_EXTENSION = '.crdownload'
-```
-
-If BeatConnect downloads are not being detected correctly, verify that this value matches the temporary download extension used by the selected browser.
+Available browsers are also listed in the same file.
 
 ## Building
 
@@ -88,7 +45,10 @@ Create a virtual environment and install dependencies:
 
 ```bash
 python3 -m venv .venv
-source .venv/bin/activate
+
+source .venv/bin/activate # for linux
+
+.venv\Scripts\activate # for windows
 
 pip install -r requirements.txt
 ```

@@ -24,7 +24,7 @@ def openFile(path: str):
 	system = platform.system()
 
 	if system == "Windows":
-		subprocess.run([path])
+		subprocess.Popen([path], shell=True)
 
 	elif system == "Darwin":
 		subprocess.run(["open", path])

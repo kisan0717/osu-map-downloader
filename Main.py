@@ -69,7 +69,7 @@ def main(url):
 	autoDownload = getAutoDownload() == '1'
 
 	if autoDownload is False:
-		# ask to either 1. download the beatmapset, 2. open the page in browser, 3. edit api credentials
+		# ask to either 1. download the beatmapset, 2. open the page in browser
 		action = askBeatmapAction()
 
 		if action is None:

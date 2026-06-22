@@ -4,7 +4,7 @@ import keyring
 from Modules.Constants import SERVICE, AVAILABLE_BROWSERS
 from Modules.Settings import getAutoDownload, toggleAutoDownload, getDefaultBrowser, setDefaultBrowser
 
-# tk gui for asking 1. download beatmap, 2. open url in browser, 3, edit credentials
+# tk gui for asking to either 1. download beatmap, 2. open url in browser
 def askBeatmapAction() -> bool | None:
 	root = tk.Tk()
 	root.title("osu! Map Downloader")

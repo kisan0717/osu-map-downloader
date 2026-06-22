@@ -138,13 +138,13 @@ def createIdleWindow():
 	root.title("osu! Map Downloader")
 	root.resizable(False, False)
 
-	# makes everything look less "2005"
 	style = ttk.Style(root)
 	style.theme_use("clam")  # try: "alt", "default", "clam", "vista" (windows)
 
 	main = ttk.Frame(root, padding=20)
 	main.grid()
 
+	# Title
 	title = ttk.Label(
 		main,
 		text="What would you like to do?",
@@ -152,6 +152,7 @@ def createIdleWindow():
 	)
 	title.grid(row=0, column=0, columnspan=2, pady=(0, 12))
 
+	# Edit Crerentials Button
 	edit_btn = ttk.Button(
 		main,
 		text="Edit Credentials",
@@ -159,20 +160,11 @@ def createIdleWindow():
 	)
 	edit_btn.grid(row=1, column=0, columnspan=2, sticky="ew", pady=(0, 10))
 
-	autoDownloadVar = tk.BooleanVar(value=getAutoDownload() == '1')
-
-	auto_check = ttk.Checkbutton(
-		main,
-		text="Automatically download beatmaps",
-		variable=autoDownloadVar,
-		command=toggleAutoDownload
-	)
-	auto_check.grid(row=2, column=0, columnspan=2, sticky="w", pady=(0, 12))
-
+	# Default Browser Dropdown
 	ttk.Label(
 		main,
 		text="Default browser:"
-	).grid(row=3, column=0, sticky="w", pady=(0, 5))
+	).grid(row=2, column=0, sticky="w", pady=(0, 5))
 
 	browserVar = tk.StringVar(value=getDefaultBrowser())
 
@@ -184,12 +176,23 @@ def createIdleWindow():
 		width=18
 	)
 
-	browserDropdown.grid(row=4, column=0, columnspan=2, sticky="ew", pady=(0, 10))
+	browserDropdown.grid(row=3, column=0, columnspan=2, sticky="ew", pady=(0, 10))
 
 	def onBrowserSelected(_event):
 		setDefaultBrowser(browserVar.get())
 
 	browserDropdown.bind("<<ComboboxSelected>>", onBrowserSelected)
+
+	# Auto Download Checkbox
+	autoDownloadVar = tk.BooleanVar(value=getAutoDownload() == '1')
+
+	auto_check = ttk.Checkbutton(
+		main,
+		text="Automatically download beatmaps",
+		variable=autoDownloadVar,
+		command=toggleAutoDownload
+	)
+	auto_check.grid(row=4, column=0, columnspan=2, sticky="w", pady=(0, 12))
 
 	# small spacing consistency
 	for i in range(2):

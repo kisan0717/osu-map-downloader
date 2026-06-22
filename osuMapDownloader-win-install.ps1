@@ -50,6 +50,18 @@ Set-Item -Path "HKCU:\Software\Classes\osuMapDownloaderURL\shell\open\command" -
 New-Item -Path "HKCU:\Software\RegisteredApplications" -Force | Out-Null
 Set-ItemProperty -Path "HKCU:\Software\RegisteredApplications" -Name "osuMapDownloader" -Value "Software\Clients\StartMenuInternet\osuMapDownloader\Capabilities"
 
+$startMenuDir = Join-Path $env:APPDATA "Microsoft\Windows\Start Menu\Programs"
+$shortcutPath = Join-Path $startMenuDir "osu! Map Downloader.lnk"
+
+$shell = New-Object -ComObject WScript.Shell
+$shortcut = $shell.CreateShortcut($shortcutPath)
+$shortcut.TargetPath = $targetExe
+$shortcut.WorkingDirectory = $installDir
+$shortcut.Description = "Download osu! beatmaps"
+$shortcut.Save()
+
+Write-Host "Start Menu shortcut created."
+
 Write-Host ""
 Write-Host "Registration complete."
 Write-Host "Now open Settings > Apps > Default Apps, search for 'osu! Map Downloader', and set it as your Web browser."

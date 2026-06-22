@@ -1,9 +1,6 @@
 import subprocess
 import platform
 from Modules.Constants import BROWSER_URL_FLAG
-from Modules.Credentials import getClient
-from Modules.Settings import getDefaultBrowser
-from Modules.WindowsBrowsers import getBrowserPathWindows
 
 def buildBrowserArgs(browser: str, browserPath: str, url: str) -> list[str]:
 	flag = BROWSER_URL_FLAG.get(browser.lower())
@@ -12,6 +9,9 @@ def buildBrowserArgs(browser: str, browserPath: str, url: str) -> list[str]:
 	return [browserPath, url]
 
 def openInBrowser(url: str):
+	from Modules.Settings import getDefaultBrowser
+	from Modules.WindowsBrowsers import getBrowserPathWindows
+
 	browser = getDefaultBrowser()
 
 	if platform.system() == "Windows":
@@ -35,6 +35,8 @@ def openFile(path: str):
 		subprocess.run(["xdg-open", path])
 
 def resolveBeatmapsetID(beatmpID: int) -> int | None:
+	from Modules.Credentials import getClient
+
 	client = getClient()
 
 	try:

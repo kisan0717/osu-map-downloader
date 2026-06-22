@@ -3,11 +3,11 @@ from traceback import print_exc
 from urllib.parse import urlparse
 from Modules.Helpers import openInBrowser, resolveBeatmapsetID, getDownloadURL
 from Modules.GUI import askBeatmapAction, createIdleWindow
-from Modules.Beatconnect import beatconnectProcess
-from Modules.DirectDownload import directDownloadProcess
-from Modules.Settings import getAutoDownload
 
 def downloadBeatmapset(url: str, service: str):
+	from Modules.DirectDownload import directDownloadProcess
+	from Modules.Beatconnect import beatconnectProcess
+
 	if service == 'beatconnect':
 		return beatconnectProcess(url)
 
@@ -46,6 +46,8 @@ def startProcess(beatmapsetID: int):
 	return False
 
 def main(url):
+	from Modules.Settings import getAutoDownload
+
 	parsed = urlparse(url if '://' in url else f'https://{url}')
 	path = parsed.path
 	parts = path.strip('/').split('/')

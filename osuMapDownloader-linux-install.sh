@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 # osuMapDownloader-linux-install.sh
-# Installs the osuMapDownloader binary system-wide into /usr/bin and registers
-# it as the default HTTP/HTTPS handler on Linux (via xdg-utils).
+# Installs the osuMapDownloader bundle system-wide into /opt/osuMapDownloader,
+# symlinks the executable into /usr/bin, and registers it as the default
+# HTTP/HTTPS handler on Linux (via xdg-utils).
 #
 # Run this from your project root after building with PyInstaller
 # (it looks for dist/osuMapDownloader relative to this script, falling
 # back to a copy sitting next to the script itself).
 #
-# Installing into /usr/bin requires root, so this script will re-invoke
+# Installing into /opt requires root, so this script will re-invoke
 # itself with sudo for the copy step if it isn't already running as root.
 #
 # Run with:
@@ -19,20 +20,20 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 EXE_NAME="osuMapDownloader"
-INSTALL_DIR="/usr/bin"
-TARGET_EXE="$INSTALL_DIR/$EXE_NAME"
+OPT_DIR="/opt/$EXE_NAME"
+SYMLINK="/usr/bin/$EXE_NAME"
 
-DIST_EXE="$SCRIPT_DIR/dist/$EXE_NAME"
-LOCAL_EXE="$SCRIPT_DIR/$EXE_NAME"
+DIST_DIR="$SCRIPT_DIR/dist/$EXE_NAME"
+LOCAL_DIR="$SCRIPT_DIR/$EXE_NAME"
 
-if [ -f "$DIST_EXE" ]; then
-	SOURCE_EXE="$DIST_EXE"
-elif [ -f "$LOCAL_EXE" ]; then
-	SOURCE_EXE="$LOCAL_EXE"
+if [ -d "$DIST_DIR" ]; then
+	SOURCE_DIR="$DIST_DIR"
+elif [ -d "$LOCAL_DIR" ]; then
+	SOURCE_DIR="$LOCAL_DIR"
 else
-	echo "Error: Could not find $EXE_NAME in ./dist/ or next to this script." >&2
+	echo "Error: Could not find $EXE_NAME directory in ./dist/ or next to this script." >&2
 	echo "Build it with PyInstaller first:" >&2
-	echo "  pyinstaller --clean --paths=. --onefile --noconsole --name osuMapDownloader Main.py" >&2
+	echo "  pyinstaller --clean --paths=. --onedir --noconsole --name osuMapDownloader Main.py" >&2
 	exit 1
 fi
 
@@ -45,19 +46,23 @@ if [ ! -f "$SOURCE_DESKTOP" ]; then
 fi
 
 if [ "$(id -u)" -eq 0 ]; then
-	cp -f "$SOURCE_EXE" "$TARGET_EXE"
-	chmod +x "$TARGET_EXE"
+	rm -rf "$OPT_DIR"
+	cp -r "$SOURCE_DIR" "$OPT_DIR"
+	chmod +x "$OPT_DIR/$EXE_NAME"
+	ln -sf "$OPT_DIR/$EXE_NAME" "$SYMLINK"
 elif command -v sudo >/dev/null 2>&1; then
-	echo "Installing to $INSTALL_DIR requires root privileges, requesting sudo..."
-	sudo cp -f "$SOURCE_EXE" "$TARGET_EXE"
-	sudo chmod +x "$TARGET_EXE"
+	echo "Installing to $OPT_DIR requires root privileges, requesting sudo..."
+	sudo rm -rf "$OPT_DIR"
+	sudo cp -r "$SOURCE_DIR" "$OPT_DIR"
+	sudo chmod +x "$OPT_DIR/$EXE_NAME"
+	sudo ln -sf "$OPT_DIR/$EXE_NAME" "$SYMLINK"
 else
-	echo "Error: Installing to $INSTALL_DIR requires root and sudo was not found." >&2
+	echo "Error: Installing to $OPT_DIR requires root and sudo was not found." >&2
 	echo "Re-run this script as root, e.g.: su -c '$0'" >&2
 	exit 1
 fi
 
-echo "Installed to $TARGET_EXE"
+echo "Installed to $OPT_DIR (symlinked from $SYMLINK)"
 
 # --- .desktop file -----------------------------------------------------
 

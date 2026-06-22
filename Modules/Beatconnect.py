@@ -1,6 +1,4 @@
 from Modules.Constants import DOWNLOAD_FILE_EXTENSIONS
-from Modules.Settings import getDefaultBrowser
-from Modules.Helpers import openFile, openInBrowser
 
 def getDownloadFilePath(path, downloads, preDownloadFiles, browser):
 	downloaded = ''
@@ -37,6 +35,8 @@ def getDownloadFilePath(path, downloads, preDownloadFiles, browser):
 def beatconnectProcess(downloadURL: str):
 	from pathlib import Path
 	import time
+	from Modules.Settings import getDefaultBrowser
+	from Modules.Helpers import openFile, openInBrowser
 
 	# get default Downloads path
 	downloads = Path.home() / "Downloads"

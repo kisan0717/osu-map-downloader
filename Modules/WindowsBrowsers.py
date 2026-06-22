@@ -1,5 +1,3 @@
-import os
-import platform
 from Modules.Constants import BROWSER_EXE_NAMES, BROWSER_FALLBACK_PATHS
 
 try:
@@ -8,6 +6,9 @@ except ImportError:
 	winreg = None  # Not on Windows
 
 def whichPathOnly(name: str) -> str | None:
+	import os
+	import platform
+
 	path_env = os.environ.get("PATH", "")
 	if platform.system() == "Windows":
 		pathext = os.environ.get("PATHEXT", ".COM;.EXE;.BAT;.CMD")
@@ -27,6 +28,8 @@ def whichPathOnly(name: str) -> str | None:
 
 
 def getBrowserPathWindows(browser: str) -> str | None:
+	import os
+
 	browser = browser.lower()
 	exe_name = BROWSER_EXE_NAMES.get(browser)
 

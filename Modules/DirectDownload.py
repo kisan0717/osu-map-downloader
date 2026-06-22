@@ -1,9 +1,9 @@
-from pathlib import Path
-import requests
-import zipfile
-from Modules.Helpers import openFile
-
 def directDownloadProcess(downloadURL: str):
+	import requests
+	import zipfile
+	from pathlib import Path
+	from Modules.Helpers import openFile
+
 	downloads = Path.home() / "Downloads"
 
 	response = requests.get(

@@ -1,9 +1,9 @@
 # osuMapDownloader-win-install.ps1
-# Installs osuMapDownloader.exe into a per-user location and registers it
-# as a candidate HTTP/HTTPS handler in Windows.
+# Installs the osuMapDownloader bundle into a per-user location and registers
+# it as a candidate HTTP/HTTPS handler in Windows.
 #
 # Run this from your project root after building with PyInstaller
-# (it looks for dist\osuMapDownloader.exe relative to this script, falling
+# (it looks for dist\osuMapDownloader relative to this script, falling
 # back to a copy sitting next to the script itself).
 #
 # Run with:
@@ -11,25 +11,25 @@
 
 $ErrorActionPreference = "Stop"
 
-$installDir = Join-Path $env:LOCALAPPDATA "Programs\osuMapDownloader"
 $exeName    = "osuMapDownloader.exe"
+$installDir = Join-Path $env:LOCALAPPDATA "Programs\osuMapDownloader"
 $targetExe  = Join-Path $installDir $exeName
 
-$distExe   = Join-Path $PSScriptRoot "dist\$exeName"
-$localExe  = Join-Path $PSScriptRoot $exeName
+$distDir  = Join-Path $PSScriptRoot "dist\osuMapDownloader"
+$localDir = Join-Path $PSScriptRoot "osuMapDownloader"
 
-if (Test-Path $distExe) {
-	$sourceExe = $distExe
-} elseif (Test-Path $localExe) {
-	$sourceExe = $localExe
+if (Test-Path $distDir -PathType Container) {
+	$sourceDir = $distDir
+} elseif (Test-Path $localDir -PathType Container) {
+	$sourceDir = $localDir
 } else {
-	Write-Error "Could not find $exeName in .\dist\ or next to this script. Build it with PyInstaller first (pyinstaller --clean --paths=. --onefile --noconsole --name osuMapDownloader Main.py)."
+	Write-Error "Could not find osuMapDownloader directory in .\dist\ or next to this script. Build it with PyInstaller first (pyinstaller --clean --paths=. --onedir --noconsole --name osuMapDownloader Main.py)."
 }
 
 New-Item -ItemType Directory -Force -Path $installDir | Out-Null
-Copy-Item -Path $sourceExe -Destination $targetExe -Force
+Copy-Item -Path "$sourceDir\*" -Destination $installDir -Recurse -Force
 
-Write-Host "Installed to $targetExe"
+Write-Host "Installed to $installDir"
 
 $commandValue = '"' + $targetExe + '" "%1"'
 

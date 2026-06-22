@@ -75,23 +75,24 @@ pip install -r requirements.txt
 Build the executable:
 
 ```bash
-pyinstaller --clean --paths=. --onefile --noconsole --name osuMapDownloader Main.py
+pyinstaller --clean --paths=. --onedir --noconsole --name osuMapDownloader Main.py
 ```
 
-The executable will be created at:
+The executable bundle will be created at:
 
 ```text
-dist/osuMapDownloader
+dist/osuMapDownloader/
 ```
 
 ---
 
 ## Manual Installation (Linux)
 
-Install the executable:
+Install the bundle:
 
 ```bash
-sudo cp dist/osuMapDownloader /usr/bin/
+sudo cp -r dist/osuMapDownloader /opt/
+sudo ln -sf /opt/osuMapDownloader/osuMapDownloader /usr/bin/osuMapDownloader
 ```
 
 Install the .desktop file:

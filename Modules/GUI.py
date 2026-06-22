@@ -56,13 +56,6 @@ def askBeatmapAction() -> bool | None:
 		width=14
 	).grid(row=0, column=1, padx=5)
 
-	ttk.Button(
-		btn_frame,
-		text="Edit Credentials",
-		command=editCredentials,
-		width=16
-	).grid(row=0, column=2, padx=5)
-
 	autoDownloadVar = tk.BooleanVar(value=getAutoDownload() == '1')
 
 	auto_check = ttk.Checkbutton(

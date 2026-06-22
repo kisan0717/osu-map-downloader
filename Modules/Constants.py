@@ -67,6 +67,11 @@ BROWSER_FALLBACK_PATHS: dict[str, list[str]] = {
 		r'C:\Program Files\Opera\opera.exe',
 		r'C:\Program Files (x86)\Opera\opera.exe',
 	],
+	'operagx': [
+		os.path.expandvars(r'%LOCALAPPDATA%\Programs\Opera GX\opera.exe'),
+		r'C:\Program Files\Opera GX\opera.exe',
+		r'C:\Program Files (x86)\Opera GX\opera.exe',
+	],
 	'vivaldi': [
 		os.path.expandvars(r'%LOCALAPPDATA%\Vivaldi\Application\vivaldi.exe'),
 		r'C:\Program Files\Vivaldi\Application\vivaldi.exe',
